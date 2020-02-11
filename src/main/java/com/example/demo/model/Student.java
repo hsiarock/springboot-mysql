@@ -1,44 +1,39 @@
 package com.example.demo.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+/**
+ *
+ * @author David Hsia
+ */
 @Entity
-@Table(name="student")
+@Table(name = "student")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 public class Student {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int student_id;
-	private String student_name;
-	private String student_email;
-	private String student_branch;
-	public int getStudent_id() {
-		return student_id;
-	}
-	public void setStudent_id(int student_id) {
-		this.student_id = student_id;
-	}
-	public String getStudent_name() {
-		return student_name;
-	}
-	public void setStudent_name(String student_name) {
-		this.student_name = student_name;
-	}
-	public String getStudent_email() {
-		return student_email;
-	}
-	public void setStudent_email(String student_email) {
-		this.student_email = student_email;
-	}
-	public String getStudent_branch() {
-		return student_branch;
-	}
-	public void setStudent_branch(String student_branch) {
-		this.student_branch = student_branch;
-	}
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int studentId;
+
+	@Column(nullable = false)
+	private String studentName;
+
+	@Column(nullable = false)
+	private String studentBranch;
+
+	private String studentEmail;
 }
