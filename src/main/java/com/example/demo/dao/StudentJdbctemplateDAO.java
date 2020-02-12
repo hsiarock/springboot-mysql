@@ -9,10 +9,10 @@ import java.util.List;
  */
 public interface StudentJdbctemplateDAO  {
 
-	boolean saveStudent(Student student);
+	boolean saveStudent(List<Student> students);
 	List<Student> getStudents();
 	boolean deleteStudent(Student student);
 	boolean updateStudent(Student student);
 	Student getStudentById(int studentId);
-
+	int getStudentBynameBranch(String name, String branch);
 }

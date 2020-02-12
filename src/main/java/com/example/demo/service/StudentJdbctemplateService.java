@@ -8,9 +8,9 @@ import java.util.List;
  */
 public interface StudentJdbctemplateService {
 
-	//boolean saveStudent(Student student);
+	boolean addStudent(List<Student> studentList);
 	List<Student> getStudents();
-	//public boolean deleteStudent(Student student);
+	boolean deleteStudent(Student student);
 	Student getStudentById(int studentId);
-	//boolean updateStudent(Student student);
+	boolean updateStudent(Student student);
 }

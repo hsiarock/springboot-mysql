@@ -26,4 +26,19 @@ public class StudentJdbctemplateServiceImpl implements StudentJdbctemplateServic
 	public Student getStudentById(int studentId) {
 		return studentJdbctemplatedao.getStudentById(studentId);
 	}
+
+	@Override
+	public boolean addStudent(List<Student> studentList) {
+        return studentJdbctemplatedao.saveStudent(studentList);
+	}
+
+	@Override
+	public boolean deleteStudent(Student student) {
+		return studentJdbctemplatedao.deleteStudent(student);
+	}
+
+	@Override
+	public boolean updateStudent(Student student) {
+		return studentJdbctemplatedao.updateStudent(student);
+	}
 }
