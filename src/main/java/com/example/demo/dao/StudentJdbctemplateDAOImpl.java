@@ -39,7 +39,7 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 	public boolean saveStudent(List<Student> students) {
 
 		//Add one student, ignore studentId from input object
-		String sql = "INSERT INTO student (studentName, studentBranch, studentEmail) values (?, ?, ?)";
+		String sql = "INSERT INTO student (studentname, studentbranch, studentemail) values (?, ?, ?)";
 		AtomicInteger counter = new AtomicInteger(0);
 
 		log.info("Bedore insert there are students to be added: " + students.size());
@@ -47,9 +47,9 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 		// insert each student from list
 		students.stream().forEach(student -> {
 
-			String sName = student.getStudentName();
-			String sBranch = student.getStudentBranch();
-			String sEmail = student.getStudentEmail();
+			String sName = student.getStudentname();
+			String sBranch = student.getStudentbranch();
+			String sEmail = student.getStudentemail();
 
 			myJdbcTemplate.update(sql, sName, sBranch, sEmail);
 
@@ -76,7 +76,7 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 
 	public List<Student> getStudents() {
 
-		String sql = "select studentId, studentBranch, studentEmail, studentName from student ";
+		String sql = "select studentid, studentbranch, studentemail, studentname from student";
 
 		if (this.myJdbcTemplate == null) {
 			System.out.println("myJdbcTemplate is null");
@@ -87,10 +87,10 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 		        new RowMapper<Student>(){
 		            public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
 		                Student student = Student.builder()
-		                	.studentId(rs.getInt("studentId"))
-		                	.studentBranch(rs.getString("studentBranch"))
-		                	.studentEmail(rs.getString("studentEmail"))
-		                	.studentName(rs.getString("studentName"))
+		                	.studentid(rs.getInt("studentid"))
+		                	.studentbranch(rs.getString("studentbranch"))
+		                	.studentemail(rs.getString("studentemail"))
+		                	.studentname(rs.getString("studentname"))
 		                	.build();
 
 		                return student;
@@ -102,11 +102,11 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 	}
 
 	@Override
-	public Student getStudentById(int studentId) {
+	public Student getStudentById(int studentid) {
 
-		String sql = "select studentId, studentBranch, studentEmail, studentName "
-				    + "from student where studentId = :id";
-		SqlParameterSource namedParameters = new MapSqlParameterSource("id", studentId);
+		String sql = "select studentid, studentbranch, studentemail, studentname "
+				    + "from student where studentid = :id";
+		SqlParameterSource namedParameters = new MapSqlParameterSource("id", studentid);
 
 		if (this.namedParameterJdbcTemplate == null) {
 			System.out.println("namedParameterJdbcTemplate is null");
@@ -116,14 +116,14 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 		Optional<Student> result = this.namedParameterJdbcTemplate.query(sql, namedParameters,
 				new DemoResultExtractor());
 
-		return result.orElse(null);
+		return result.orElse(new Student(0, "", "", ""));
 	}
 
 	@Override
 	public int getStudentBynameBranch(String name, String branch) {
 
-		String sql = "select studentId, studentBranch, studentName, studentEmail from student " +
-					     "where studentName = :name and studentBranch = :branch";
+		String sql = "select studentid, studentbranch, studentemail, studentname from student " +
+					     "where studentname = :name and studentbranch = :branch";
 		SqlParameterSource namedParameters =
 				new MapSqlParameterSource("branch", branch).addValue("name", name);
 
@@ -132,26 +132,26 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 		Optional<Student> result = this.namedParameterJdbcTemplate.query(sql, namedParameters,
 				new DemoResultExtractor());
 
-		return result.isEmpty() ? -99 : result.get().getStudentId(); // failed return -99
+		return result.isEmpty() ? -99 : result.get().getStudentid(); // failed return -99
 	}
 
 	@Override
 	public boolean deleteStudent(Student student) {
 		//for now only use studentId
-		String sql = "DELETE FROM student WHERE studentId = ?";
-		return myJdbcTemplate.update(sql, student.getStudentId()) > 0;
+		String sql = "DELETE FROM student WHERE studentid = ?";
+		return myJdbcTemplate.update(sql, student.getStudentid()) > 0;
 	}
 
 	@Override
 	public boolean updateStudent(Student student) {
 		//for now only use studentId
 		String sql =
-		"UPDATE student SET studentBranch = ?, studentName = ?, studentEmail = ? WHERE studentId = ?";
+		"UPDATE student SET studentbranch = ?, studentname = ?, studentemail = ? WHERE studentid = ?";
 		return myJdbcTemplate.update(sql,
-				                     student.getStudentBranch(),
-				                     student.getStudentName(),
-				                     student.getStudentEmail(),
-				                     student.getStudentId()) > 0;
+				                     student.getStudentbranch(),
+				                     student.getStudentname(),
+				                     student.getStudentemail(),
+				                     student.getStudentid()) > 0;
 	}
 
 }

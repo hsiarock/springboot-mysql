@@ -23,8 +23,8 @@ public class StudentJdbctemplateServiceImpl implements StudentJdbctemplateServic
 	}
 
 	@Override
-	public Student getStudentById(int studentId) {
-		return studentJdbctemplatedao.getStudentById(studentId);
+	public Student getStudentById(int studentid) {
+		return studentJdbctemplatedao.getStudentById(studentid);
 	}
 
 	@Override

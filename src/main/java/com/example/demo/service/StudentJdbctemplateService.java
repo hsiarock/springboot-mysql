@@ -11,6 +11,6 @@ public interface StudentJdbctemplateService {
 	boolean addStudent(List<Student> studentList);
 	List<Student> getStudents();
 	boolean deleteStudent(Student student);
-	Student getStudentById(int studentId);
+	Student getStudentById(int studentid);
 	boolean updateStudent(Student student);
 }

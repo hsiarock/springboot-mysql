@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentJdbctemplateService;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 //@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(value = "/jdbctemplate")
+@Slf4j
 public class ControllerUseJdbctemplate {
 
 	@Autowired
@@ -30,13 +32,20 @@ public class ControllerUseJdbctemplate {
 	@GetMapping("students-list")
 	public ResponseEntity<List<Student>> allstudents() {
 		List<Student> stduentList = jdbctemplateService.getStudents();
+		log.info("return student list size: " + stduentList.size());
 
 		return new ResponseEntity<List<Student>>(stduentList, HttpStatus.OK);
 	}
 
-	@GetMapping("studentById/{studentId}")
-	public ResponseEntity<Student> getStudentById(@PathVariable("studentId") int studentId) {
-		Student student = jdbctemplateService.getStudentById(studentId);
+	@GetMapping("studentById/{studentid}")
+	public ResponseEntity<Student> getStudentById(@PathVariable("studentid") int studentid) {
+		Student student = jdbctemplateService.getStudentById(studentid);
+
+		log.info("return student id: " + student.getStudentid());
+		log.info("return student branch: " + student.getStudentbranch());
+		log.info("return student email: " + student.getStudentemail());
+		log.info("return student name: " + student.getStudentname());
+
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
 

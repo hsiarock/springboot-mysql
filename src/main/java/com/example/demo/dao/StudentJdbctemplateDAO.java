@@ -13,6 +13,6 @@ public interface StudentJdbctemplateDAO  {
 	List<Student> getStudents();
 	boolean deleteStudent(Student student);
 	boolean updateStudent(Student student);
-	Student getStudentById(int studentId);
+	Student getStudentById(int studentid);
 	int getStudentBynameBranch(String name, String branch);
 }
