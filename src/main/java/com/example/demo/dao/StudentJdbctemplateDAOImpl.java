@@ -38,7 +38,7 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 	@Override
 	public boolean saveStudent(List<Student> students) {
 
-		//Add one student, ignore student_id from input object
+		//Add one student, ignore studentId from input object
 		String sql = "INSERT INTO student (studentName, studentBranch, studentEmail) values (?, ?, ?)";
 		AtomicInteger counter = new AtomicInteger(0);
 

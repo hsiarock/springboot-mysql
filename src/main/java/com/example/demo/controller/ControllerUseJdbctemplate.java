@@ -30,6 +30,7 @@ public class ControllerUseJdbctemplate {
 	@GetMapping("students-list")
 	public ResponseEntity<List<Student>> allstudents() {
 		List<Student> stduentList = jdbctemplateService.getStudents();
+
 		return new ResponseEntity<List<Student>>(stduentList, HttpStatus.OK);
 	}
 
