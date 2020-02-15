@@ -22,6 +22,12 @@ public class LookupStateCode {
 	private StudentJdbctemplateDAO studentJdbctemplatedao;
 
 	/**
+	 * no instantiate
+	 */
+	private LookupStateCode() {
+	}
+
+	/**
 	 * To fix the LI_LAZY_INIT_STATIC spotBug error.
 	 * i.e. race condition in multi-thread lazy instantiation
 	 * use double check lock here<br>
