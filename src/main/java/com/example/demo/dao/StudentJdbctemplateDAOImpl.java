@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.StateCode;
 import com.example.demo.model.Student;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
-
 
 /**
  *
@@ -152,6 +152,29 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 				                     student.getStudentname(),
 				                     student.getStudentemail(),
 				                     student.getStudentid()) > 0;
+	}
+
+	@Override
+	public List<StateCode> getStateCode() {
+		String sql = "select name, status from lookupstatecode";
+
+		if (myJdbcTemplate == null) {
+			System.out.println("myJdbcTemplate is null");
+			return null;
+		}
+
+		List<StateCode> result = myJdbcTemplate.query(sql, new RowMapper<StateCode>() {
+			public StateCode mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// add into statecode cache
+				StateCode stcode = StateCode.builder()
+						.name(rs.getString("name"))
+						.status(rs.getString("status"))
+						.build();
+				return stcode;
+			}
+		});
+
+		return result;
 	}
 
 }

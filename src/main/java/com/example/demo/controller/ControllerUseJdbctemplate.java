@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Student;
+import com.example.demo.service.LookupStateCode;
 import com.example.demo.service.StudentJdbctemplateService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,9 @@ public class ControllerUseJdbctemplate {
 
 	@Autowired
 	StudentJdbctemplateService jdbctemplateService;
+
+	@Autowired
+	LookupStateCode lookupStateCode;
 
 	@GetMapping("students-list")
 	public ResponseEntity<List<Student>> allstudents() {
@@ -82,6 +86,18 @@ public class ControllerUseJdbctemplate {
 			return new ResponseEntity<Void>(headers, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
+	}
+
+	@GetMapping("lookupStateCode/{statecode}")
+	public ResponseEntity<String> getStudentById(@PathVariable("statecode") String statecode,
+											UriComponentsBuilder builder) {
+		if (lookupStateCode.check(statecode)) {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(builder.path("/lookupStateCode").build().toUri());
+			return new ResponseEntity<String>(headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>(HttpStatus.CONFLICT);
 		}
 	}
 
