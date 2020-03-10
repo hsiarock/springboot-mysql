@@ -132,7 +132,7 @@ public class StudentJdbctemplateDAOImpl implements StudentJdbctemplateDAO {
 		Optional<Student> result = this.namedParameterJdbcTemplate.query(sql, namedParameters,
 				new DemoResultExtractor());
 
-		return result.isEmpty() ? -99 : result.get().getStudentid(); // failed return -99
+		return result.orElseGet(() -> new Student(-1, "", "", "")).getStudentid();
 	}
 
 	@Override

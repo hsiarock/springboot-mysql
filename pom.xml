@@ -24,7 +24,7 @@
 		<jacoco.plugin.version>0.8.4</jacoco.plugin.version>
 		<spotbugs.plugin.version>3.1.12.2</spotbugs.plugin.version>
 		<pmd.plugin.version>3.12.0</pmd.plugin.version>
-		<checkstyle.plugin.version>3.1.0</checkstyle.plugin.version>
+		<checkstyle.plugin.version>3.1.1</checkstyle.plugin.version>
 
 		<pmd.violation.buildfail>true</pmd.violation.buildfail>
 		<pmd.exclude.file.location>pmd-exclude.properties</pmd.exclude.file.location>
@@ -54,19 +54,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
-	    <!--  MySQL -->
-	    <!-- 
+	              <!--  MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		 -->
-		<!--  Postgres SQL -->
+		      <!--  Postgres SQL -->
+		<!--
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -264,7 +264,7 @@
 						<dependency>
 							<groupId>com.puppycrawl.tools</groupId>
 							<artifactId>checkstyle</artifactId>
-							<version>8.14</version>
+							<version>8.29</version>
 						</dependency>
 					</dependencies>
 				</plugin>

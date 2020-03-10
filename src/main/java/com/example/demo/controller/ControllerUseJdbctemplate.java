@@ -38,7 +38,7 @@ public class ControllerUseJdbctemplate {
 		List<Student> stduentList = jdbctemplateService.getStudents();
 		log.info("return student list size: " + stduentList.size());
 
-		return new ResponseEntity<List<Student>>(stduentList, HttpStatus.OK);
+		return new ResponseEntity<>(stduentList, HttpStatus.OK);
 	}
 
 	@GetMapping("studentById/{studentid}")
@@ -50,7 +50,7 @@ public class ControllerUseJdbctemplate {
 		log.info("return student email: " + student.getStudentemail());
 		log.info("return student name: " + student.getStudentname());
 
-		return new ResponseEntity<Student>(student, HttpStatus.OK);
+		return new ResponseEntity<>(student, HttpStatus.OK);
 	}
 
 	@PostMapping("addStudent")
@@ -59,9 +59,9 @@ public class ControllerUseJdbctemplate {
 		if (jdbctemplateService.addStudent(studentList)) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(builder.path("/addStudent").build().toUri());
-			return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+			return new ResponseEntity<>(headers, HttpStatus.CREATED);
 		} else {
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 	}
 
@@ -71,9 +71,9 @@ public class ControllerUseJdbctemplate {
 		if (jdbctemplateService.deleteStudent(student)) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(builder.path("/deleteStudent").build().toUri());
-			return new ResponseEntity<Void>(headers, HttpStatus.OK);
+			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 	}
 
@@ -83,9 +83,9 @@ public class ControllerUseJdbctemplate {
 		if (jdbctemplateService.updateStudent(student)) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(builder.path("/updateStudent").build().toUri());
-			return new ResponseEntity<Void>(headers, HttpStatus.OK);
+			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 	}
 
@@ -95,9 +95,9 @@ public class ControllerUseJdbctemplate {
 		if (lookupStateCode.check(statecode)) {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setLocation(builder.path("/lookupStateCode").build().toUri());
-			return new ResponseEntity<String>(headers, HttpStatus.OK);
+			return new ResponseEntity<>(headers, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<String>(HttpStatus.CONFLICT);
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
 	}
 
